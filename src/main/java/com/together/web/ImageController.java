@@ -1,14 +1,18 @@
 package com.together.web;
 
 import com.together.config.auth.PrincipalDetails;
+import com.together.domain.image.Image;
 import com.together.handler.ex.CustomValidationException;
 import com.together.service.ImageService;
 import com.together.web.dto.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+
+import java.util.List;
 
 @RequiredArgsConstructor
 @Controller
@@ -21,8 +25,10 @@ public class ImageController {
         return "image/story";
     }
 
-    @GetMapping({"/image/popular"})
-    public String popular() {
+    @GetMapping("/image/popular")
+    public String popular(Model model) {
+        List<Image> images = imageService.인기사진();
+        model.addAttribute("images", images);
         return "image/popular";
     }
 

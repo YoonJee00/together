@@ -158,4 +158,3 @@ function toggleLike(imageId) {
 
 	}
 }
-

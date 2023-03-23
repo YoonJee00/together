@@ -1,5 +1,6 @@
 package com.together.domain.likes;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.together.domain.image.Image;
 import com.together.domain.user.User;
 import lombok.AllArgsConstructor;
@@ -34,6 +35,7 @@ public class Likes {
 
     @JoinColumn(name = "userId")
     @ManyToOne
+    @JsonIgnoreProperties({"images"})
     private User user;
     private LocalDateTime createDate;
 
