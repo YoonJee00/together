@@ -22,8 +22,9 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         this.user = user;
     }
 
-    public PrincipalDetails(User user, Map<String, Object> attributes) {this.user = user;}
-
+    public PrincipalDetails(User user, Map<String, Object> attributes) {
+        this.user =user;
+    }
     @Override
     public String getPassword() {
         return user.getPassword();
@@ -57,16 +58,6 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
     }
 
     @Override
-    public Map<String, Object> getAttributes() {
-        return attributes;
-    }
-
-    @Override
-    public String getName() {
-        return (String) attributes.get("names");
-    }
-
-    @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
         Collection<GrantedAuthority> collectors = new ArrayList<>();
         collectors.add(() -> {
@@ -74,5 +65,15 @@ public class PrincipalDetails implements UserDetails, OAuth2User {
         });
 
         return collectors;
+    }
+
+    @Override
+    public Map<String, Object> getAttributes() {
+        return attributes;
+    }
+
+    @Override
+    public String getName() {
+        return (String) attributes.get("name");
     }
 }
