@@ -1,5 +1,5 @@
 server:
-  port: 80
+  port: 8077
   servlet:
     context-path: /
     encoding:
@@ -36,15 +36,15 @@ spring:
       name: root
       password: 1234
 
-#    oauth2:
-#      client:
-#        registration:
-#          facebook:
-#            client-id: 315293796826930
-#            client-secret: 487af9479023b8c0e58f913b411327cf
-#            scope:
-#              - public_profile
-#              - email
+    oauth2:
+      client:
+        registration:
+          facebook:
+            client-id: 227381696489053
+            client-secret: 49d590889b94af25fcea3784f39e8046
+            scope:
+              - public_profile
+              - email
 
 
 file:
