@@ -1,6 +1,7 @@
 package com.together.domain.image;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+import com.together.domain.likes.Likes;
 import com.together.domain.user.User;
 
 import lombok.AllArgsConstructor;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Builder
 @AllArgsConstructor
@@ -30,8 +32,18 @@ public class Image {
 
     private LocalDateTime createDate;
 
+    @Transient
+    private boolean likeState;
+
+    @Transient
+    private int likeCount;
+
     @PrePersist
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
+
+    @JsonIgnoreProperties({"image"})
+    @OneToMany(mappedBy = "image")
+    private List<Likes> likes;
 }
