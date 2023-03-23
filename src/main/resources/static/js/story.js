@@ -1,46 +1,34 @@
-// 현재 로그인한 유저의 ID
-let principalId = $("#principalId").val();
-console.log("로그인한 유저 : ", principalId)
+/**
+	2. 스토리 페이지
+	(1) 스토리 로드하기
+	(2) 스토리 스크롤 페이징하기
+	(3) 좋아요, 안좋아요
+	(4) 댓글쓰기
+	(5) 댓글삭제
+ */
 
-// 스크롤 페이징을 위한 변수생성
-let page = 0;
+// (0) 현재 로긴한 사용자 아이디
+let principalId = $("#principalId").val();
 
 // (1) 스토리 로드하기
-function storyLoad() {
-    $.ajax({
-        url: `/api/image?page=${page}`,
-        dataType: "json"
-    }).done(res => {
-        console.log("성공", res)
+let page = 0;
 
-        res.data.content.forEach((image) => {
-            let storyItem = getStoryItem(image);
-            $("#storyList").append(storyItem);
-        });
-    }).fail(error => {
-        console.log("실패", error)
-    });
+function storyLoad() {
+	$.ajax({
+		url: `/api/image?page=${page}`,
+		dataType: "json"
+	}).done(res => {
+		//console.log(res);
+		res.data.content.forEach((image)=>{
+			let storyItem = getStoryItem(image);
+			$("#storyList").append(storyItem);
+		});
+	}).fail(error => {
+		console.log("오류", error);
+	});
 }
 
 storyLoad();
-
-function storyLoad2() {
-    $.ajax({
-        url: `/api/image/all?page=${page}`,
-        dataType: "json"
-    }).done(res => {
-        console.log("성공", res)
-
-        res.data.forEach((image) => {
-            let storyItem = getStoryItem(image);
-            $("#storyList").append(storyItem);
-        });
-    }).fail(error => {
-        console.log("실패", error)
-    });
-}
-
-storyLoad2();
 
 function getStoryItem(image) {
 	let item = `<div class="story-list__item">
@@ -61,9 +49,9 @@ function getStoryItem(image) {
 
 			<button>`;
 
-				if(image.likeState){
+			     if(image.likeState){
 					item += `<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
-				} else {
+				}else{
 					item += `<i class="far fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
 				}
 
@@ -72,44 +60,60 @@ function getStoryItem(image) {
 			</button>
 		</div>
 
-        <span class="like"><b id="storyLikeCount-${image.id}">${image.likeCount} </b>likes</span>
+		<span class="like"><b id="storyLikeCount-${image.id}">${image.likeCount} </b>likes</span>
 
-        <div class="sl__item__contents__content">
+		<div class="sl__item__contents__content">
 			<p>${image.caption}</p>
 		</div>
 
-		<div id="storyCommentList-1">
+		<div id="storyCommentList-${image.id}">`;
 
-			<div class="sl__item__contents__comment" id="storyCommentItem-1"">
+			image.comments.forEach((comment)=>{
+				item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 				<p>
-					<b>Lovely :</b> 부럽습니다.
-				</p>
+					<b>${comment.user.username} :</b> ${comment.content}
+				</p>`;
 
-				<button>
-					<i class="fas fa-times"></i>
-				</button>
+				if(principalId == comment.user.id){
+					item += `	<button onclick="deleteComment(${comment.id})">
+										<i class="fas fa-times"></i>
+									</button>`;
+				}
 
-			</div>
+			item += `
+			</div>`;
 
+			});
+
+
+		item += `
 		</div>
 
 		<div class="sl__item__input">
-			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-1" />
-			<button type="button" onClick="addComment()">게시</button>
+			<input type="text" placeholder="댓글 달기..." id="storyCommentInput-${image.id}" />
+			<button type="button" onClick="addComment(${image.id})">게시</button>
 		</div>
 
 	</div>
-</div>`
+</div>`;
 	return item;
 }
+
 // (2) 스토리 스크롤 페이징하기
 $(window).scroll(() => {
-    let checkNum = $(window).scrollTop() - ($(document).height() - $(window).height());
-    if (checkNum < 1 && checkNum > -1) {
-        page++;
-        storyLoad();
-    }
+	//console.log("윈도우 scrollTop", $(window).scrollTop());
+	//console.log("문서의 높이", $(document).height());
+	//console.log("윈도우 높이", $(window).height());
+
+	let checkNum = $(window).scrollTop() - ( $(document).height() - $(window).height() );
+	//console.log(checkNum);
+
+	if(checkNum < 1 && checkNum > -1){
+		page++;
+		storyLoad();
+	}
 });
+
 
 // (3) 좋아요, 안좋아요
 function toggleLike(imageId) {
@@ -158,3 +162,71 @@ function toggleLike(imageId) {
 
 	}
 }
+
+// (4) 댓글쓰기
+function addComment(imageId) {
+
+	let commentInput = $(`#storyCommentInput-${imageId}`);
+	let commentList = $(`#storyCommentList-${imageId}`);
+
+	let data = {
+		imageId: imageId,
+		content: commentInput.val()
+	}
+
+	//console.log(data);
+	//console.log(JSON.stringify(data));
+
+	if (data.content === "") {
+		alert("댓글을 작성해주세요!");
+		return;
+	}
+
+	$.ajax({
+		type: "post",
+		url: "/api/comment",
+		data: JSON.stringify(data),
+		contentType: "application/json; charset=utf-8",
+		dataType: "json"
+	}).done(res=>{
+		//console.log("성공", res);
+
+		let comment = res.data;
+
+		let content = `
+		  <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+		    <p>
+		      <b>${comment.user.username} :</b>
+		      ${comment.content}
+		    </p>
+		    <button onclick="deleteComment(${comment.id})"><i class="fas fa-times"></i></button>
+		  </div>
+		`;
+		commentList.prepend(content);
+	}).fail(error=>{
+		console.log("오류", error.responseJSON.data.content);
+		alert(error.responseJSON.data.content);
+	});
+
+	commentInput.val(""); // 인풋 필드를 깨끗하게 비워준다.
+}
+
+// (5) 댓글 삭제
+function deleteComment(commentId) {
+	$.ajax({
+		type: "delete",
+		url: `/api/comment/${commentId}`,
+		dataType: "json"
+	}).done(res=>{
+		console.log("성공", res);
+		$(`#storyCommentItem-${commentId}`).remove();
+	}).fail(error=>{
+		console.log("오류", error);
+	});
+}
+
+
+
+
+
+

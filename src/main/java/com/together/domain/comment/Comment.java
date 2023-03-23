@@ -1,10 +1,8 @@
-package com.together.domain.image;
+package com.together.domain.comment;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
-import com.together.domain.comment.Comment;
-import com.together.domain.likes.Likes;
+import com.together.domain.image.Image;
 import com.together.domain.user.User;
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -12,44 +10,33 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
 @Entity
-public class Image {
+public class Comment {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private int id;
-    private String caption;
-    private String postImageUrl;
+
+    @Column(length = 100, nullable = false)
+    private String content;
 
     @JsonIgnoreProperties({"images"})
-    @JoinColumn(name="userId")
+    @JoinColumn(name = "userId")
     @ManyToOne(fetch = FetchType.EAGER)
     private User user;
 
+    @JoinColumn(name = "imageId")
+    @ManyToOne(fetch = FetchType.EAGER)
+    private Image image;
+
     private LocalDateTime createDate;
-
-    @Transient
-    private boolean likeState;
-
-    @Transient
-    private int likeCount;
 
     @PrePersist
     public void createDate() {
         this.createDate = LocalDateTime.now();
     }
-
-    @JsonIgnoreProperties({"image"})
-    @OneToMany(mappedBy = "image")
-    private List<Likes> likes;
-
-    @OrderBy("id DESC")
-    @JsonIgnoreProperties({"image"})
-    @OneToMany(mappedBy = "image")
-    private List<Comment> comments;
 }
