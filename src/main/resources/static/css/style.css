@@ -102,7 +102,7 @@ button {
 
 /*버튼 hover 액션*/
 .login__input button:hover {
-  background: #FFA500;
+  background: #FF8C00;
 }
 
 /* login__horizon 붙은건 그냥 hr을 디자인한거. */
