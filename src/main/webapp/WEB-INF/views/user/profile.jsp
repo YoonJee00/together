@@ -19,7 +19,7 @@
 				</form>
 
 				<img class="profile-image" src="/upload/${dto.user.profileImageUrl}"
-					onerror="this.src='/images/person.jpeg'" id="userProfileImage" />
+					onerror="this.src='/images/person.png'" id="userProfileImage" />
 
 			</div>
 		</div>
@@ -106,6 +106,7 @@
 	<div class="modal">
 		<button onclick="location.href='/user/${dto.user.id}/update'">회원정보 변경</button>
 		<button onclick="location.href='/logout'">로그아웃</button>
+		<button onclick="location.href='/user/${dto.user.id}/delete'">회원탈퇴</button>
 		<button onclick="closePopup('.modal-info')">취소</button>
 	</div>
 </div>

@@ -35,4 +35,9 @@ public class UserController {
 //        System.out.println("직접 찾은 세션 정보: " + mPrincipalDetails.getUser());
         return "user/update";
     }
+
+    @GetMapping("user/{id}/delete")
+    public String delete(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        return "user/delete";
+    }
 }
