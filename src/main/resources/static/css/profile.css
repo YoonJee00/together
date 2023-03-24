@@ -65,7 +65,7 @@
   padding: 5px 9px;
   border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
   border-radius: 4px;
-  color: #262626;
+  color: #FF8C00;
   font-weight: bold;
   background: transparent;
 }
@@ -89,7 +89,7 @@
 }
 .profile .profile-right .subscribe ul li a {
   font-size: 16px;
-  color: #262626;
+  color: #FFA500;
 }
 .profile .profile-right .subscribe ul li a span {
   font-weight: bold;
@@ -302,7 +302,7 @@
 }
 .modal-image .modal button:nth-child(2) {
   font-weight: 600;
-  color: #0095f6;
+  color: #FFA500;
 }
 .modal-image .modal button:not(:last-child) {
   border-bottom: 1px solid #dbdbdb;
@@ -384,12 +384,12 @@
   padding: 10px 10px;
   border: 1px solid rgba(var(--ca6, 219, 219, 219), 1);
   border-radius: 4px;
-  color: #262626;
+  color: #FFA500;
   font-weight: bold;
   background: transparent;
 }
 .cta.blue {
-  background: #0095f6 !important;
+  background: #FF8C00 !important;
   color: #fff !important;
 }
 

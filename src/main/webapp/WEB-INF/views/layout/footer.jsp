@@ -15,7 +15,7 @@
 			<li><a href="#a">위치</a></li>
 		</ul>
 		<div class="copy">
-			<p>Instagram</p>
+			<p>Together</p>
 		</div>
 	</div>
 </footer>
