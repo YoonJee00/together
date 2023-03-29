@@ -35,7 +35,7 @@ function getStoryItem(image) {
    <div class="sl__item__header">
       <div>
          <img class="profile-image" src="/upload/${image.user.profileImageUrl}"
-            onerror="this.src='/images/person.png'" />
+              onerror="this.src='/images/person.png'" onclick="goToProfile(${image.user.id})"/>
       </div>
       <div>${image.user.username}</div>
    </div>
@@ -97,6 +97,10 @@ function getStoryItem(image) {
    </div>
 </div>`;
    return item;
+}
+
+function goToProfile(userId) {
+    location.href = `/user/${userId}`;
 }
 
 // (2) 스토리 스크롤 페이징하기
