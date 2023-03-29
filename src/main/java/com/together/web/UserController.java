@@ -1,22 +1,31 @@
 package com.together.web;
 
 import com.together.config.auth.PrincipalDetails;
+import com.together.domain.user.User;
 import com.together.service.UserService;
 import com.together.web.dto.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
+import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.*;
+import org.springframework.web.servlet.ModelAndView;
+import org.springframework.web.servlet.mvc.support.RedirectAttributes;
+
+import javax.servlet.http.HttpServlet;
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
+
 
 @RequiredArgsConstructor
 @Controller
 public class UserController {
 
     private final UserService userService;
+    private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/user/{pageUserid}")
     public String profile(@PathVariable int pageUserid, Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
@@ -37,7 +46,20 @@ public class UserController {
     }
 
     @GetMapping("user/{id}/delete")
-    public String delete(@PathVariable int id, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        return "user/delete";
+    public String delete(@PathVariable int id, Model model) {
+        model.addAttribute("Id", id);
+        return "user/delete-confirm";
     }
+
+    @PostMapping("user/{id}/delete")
+    public String deleteUser(@PathVariable int id, @RequestParam String confirm, RedirectAttributes redirectAttributes) {
+        if ("yes".equalsIgnoreCase(confirm)) {
+            // 회원 탈퇴 처리
+            userService.deleteUserById(id);
+            redirectAttributes.addFlashAttribute("message", "회원 탈퇴가 완료되었습니다.");
+            return "redirect:/auth/signin";
+        }
+        return "redirect:/user/" + id + "/delete";
+    }
+
 }

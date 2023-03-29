@@ -1,5 +1,8 @@
 package com.together.service;
 
+import com.together.domain.comment.CommentRepository;
+import com.together.domain.image.ImageRepository;
+import com.together.domain.likes.LikesRepository;
 import com.together.domain.subscribe.SubscribeRepository;
 import com.together.domain.user.User;
 import com.together.domain.user.UserRepository;
@@ -26,6 +29,9 @@ public class UserService {
     private final UserRepository userRepository;
 
     private final SubscribeRepository subscribeRepository;
+    private final ImageRepository imageRepository;
+    private final LikesRepository likesRepository;
+    private final CommentRepository commentRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @Value("${file.path}")
@@ -34,10 +40,10 @@ public class UserService {
     @Transactional
     public User 회원프로필사진변경(int principalId, MultipartFile profileImageFile) {
         UUID uuid = UUID.randomUUID(); // uuid
-        String imageFileName = uuid+"_"+profileImageFile.getOriginalFilename(); // 1.jpg
-        System.out.println("이미지 파일이름 : "+imageFileName);
+        String imageFileName = uuid + "_" + profileImageFile.getOriginalFilename(); // 1.jpg
+        System.out.println("이미지 파일이름 : " + imageFileName);
 
-        Path imageFilePath = Paths.get(uploadFolder+imageFileName);
+        Path imageFilePath = Paths.get(uploadFolder + imageFileName);
 
         // 통신, I/O -> 예외가 발생할 수 있다.
         try {
@@ -46,7 +52,7 @@ public class UserService {
             e.printStackTrace();
         }
 
-        User userEntity = userRepository.findById(principalId).orElseThrow(()->{
+        User userEntity = userRepository.findById(principalId).orElseThrow(() -> {
             // throw -> return 으로 변경
             return new CustomApiException("유저를 찾을 수 없습니다.");
         });
@@ -102,4 +108,16 @@ public class UserService {
 
         return userEntity;
     }
+
+    @Transactional
+    public void deleteUserById(int id) {
+        subscribeRepository.deleteAllByFromUserId(id);
+        subscribeRepository.deleteAllByToUserId(id);
+        imageRepository.deleteAllByUserId(id);
+        likesRepository.deleteAllByUserId(id);
+        commentRepository.deleteAllByUserId(id);
+
+        userRepository.deleteById(id);
+    }
+
 }

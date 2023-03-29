@@ -14,7 +14,10 @@ import org.springframework.web.bind.annotation.PostMapping;
 
 import com.together.web.dto.SignupDto;
 
+import javax.servlet.http.HttpServletRequest;
+import javax.servlet.http.HttpSession;
 import javax.validation.Valid;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
@@ -57,4 +60,5 @@ public class AuthController {
 //        System.out.println(userEntity);
         return "auth/signin";
     }
+
 }
