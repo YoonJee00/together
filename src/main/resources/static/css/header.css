@@ -30,8 +30,18 @@
   display: flex;
   align-items: center;
 }
+
 .logo img {
   width: 120px;
+}
+
+.logo2 {
+  display: flex;
+  margin-right: auto;
+}
+
+.logo2 img {
+  width: 75px;
 }
 
 .navi > .navi-list {

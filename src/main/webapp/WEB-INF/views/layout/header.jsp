@@ -41,6 +41,10 @@
 			<a href="/" class="logo">
 				<img src="/images/logo.png" alt="">
 			</a>
+			<a href="/" class="logo2">
+				<img src="/images/logo2.png" alt="">
+			</a>
+
 			<nav class="navi">
 				<ul class="navi-list">
 					<li class="navi-item"><a href="/">
