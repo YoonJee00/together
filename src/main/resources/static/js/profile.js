@@ -46,13 +46,16 @@ function subscribeInfoModalOpen(pageUserId) {
 function getSubscribeModalItem(u) {
 
 	let item = `<div class="subscribe__item" id="subscribeModalItem-${u.id}">
-	<div class="subscribe__img">
-		<img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/person.png'" />
-	</div>
-	<div class="subscribe__text">
-		<h2>${u.username}</h2>
-	</div>
-	<div class="subscribe__btn">`;
+       <div class="subscribe__img">
+          <a href="/user/${u.id}">
+             <img src="/upload/${u.profileImageUrl}" onerror="this.src='/images/person.png'" />
+          </a>
+       </div>
+       <div class="subscribe__text">
+          <h2>${u.username}</h2>
+       </div>
+       <div class="subscribe__btn">
+    `;
 
 	if(!u.equalUserState){ // 동일 유저가 아닐 때 버튼이 만들이 만들어져야함
 		if(u.subscribeState){ // 구독한 상태
