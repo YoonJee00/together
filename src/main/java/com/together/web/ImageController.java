@@ -4,12 +4,14 @@ import com.together.config.auth.PrincipalDetails;
 import com.together.domain.image.Image;
 import com.together.handler.ex.CustomValidationException;
 import com.together.service.ImageService;
+import com.together.web.dto.ImageDetailDto;
 import com.together.web.dto.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import java.util.List;
@@ -45,5 +47,12 @@ public class ImageController {
 
         imageService.사진업로드(imageUploadDto, principalDetails);
         return "redirect:/user/" + principalDetails.getUser().getId();
+    }
+
+    @GetMapping("/image/{imageId}")
+    public String detailImage(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
+        ImageDetailDto imageDetailDto = imageService.detailImage(imageId, principalDetails.getId());
+        model.addAttribute("detailDto", imageDetailDto);
+        return "image/detail";
     }
 }

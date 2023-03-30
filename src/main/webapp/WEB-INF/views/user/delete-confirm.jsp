@@ -7,17 +7,13 @@
 <body>
 <%@ include file="../layout/header.jsp"%>
 
-<div class="container" style="display: flex; flex-direction: column; justify-content: center; align-items: center;">
-  <h1>정말로 회원 탈퇴를 하시겠습니까?</h1>
-  <form action="/user/${Id}/delete" method="post">
+<h1>정말로 회원 탈퇴를 하시겠습니까?</h1>
+<form action="/user/${Id}/delete" method="post">
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <input type="hidden" name="confirm" value="yes"/>
-    <div style="display: flex; flex-direction: column; margin-top: 1rem;">
-      <button type="submit" style="margin-bottom: 1rem;">예</button>
-      <button type="button" onclick="history.back()">아니오</button>
-    </div>
-  </form>
-</div>
+    <button type="submit">예</button>
+    <button type="button" onclick="history.back()">아니오</button>
+</form>
 
 <%@ include file="../layout/footer.jsp"%>
 </body>

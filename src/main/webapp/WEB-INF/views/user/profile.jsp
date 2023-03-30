@@ -85,13 +85,12 @@
 
 				<c:forEach var="image" items="${dto.user.images}"> <!-- EL표현식에서 변수명을 적으면 get함수가 자동 호출된다. -->
 					<div class="img-box">
-						<a href=""> <img src="/upload/${image.postImageUrl}" />
-						</a>
-						<div class="comment">
-							<a href="#" class=""> <i class="fas fa-heart"></i><span>${image.likeCount}</span>
-							</a>
-						</div>
-					</div>
+                        <img src="/upload/${image.postImageUrl}">
+                        <div class="comment"
+                            <c:if test= "${principal.id eq profileDto.id }" > onclick="postPopup('.modal-post', ${image.id})" </c:if>
+                            onclick="location.href='/image/${image.id}'">
+                        </div>
+                    </div>
 				</c:forEach>
 
 

@@ -3,6 +3,7 @@ package com.together.service;
 import com.together.config.auth.PrincipalDetails;
 import com.together.domain.image.Image;
 import com.together.domain.image.ImageRepository;
+import com.together.web.dto.ImageDetailDto;
 import com.together.web.dto.ImageUploadDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -66,5 +67,13 @@ public class ImageService {
         Image image = imageUploadDto.toEntity(imageFileName, principalDetails.getUser());
         imageRepository.save(image);
 
+    }
+
+    @Transactional
+    public ImageDetailDto detailImage(int imageId, int principalId) {
+        Image image = imageRepository.imageDetail(imageId, principalId);
+        ImageDetailDto imageDetailDto = new ImageDetailDto(image);
+
+        return imageDetailDto;
     }
 }
