@@ -211,7 +211,7 @@
   .sl__item__contents__icon
   button:first-child
   .active {
-  color: red;
+  color: crimson;
 }
 
 .profile-image {
