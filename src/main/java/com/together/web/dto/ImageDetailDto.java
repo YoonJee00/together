@@ -1,7 +1,10 @@
 package com.together.web.dto;
 
+import com.together.domain.comment.Comment;
 import com.together.domain.image.Image;
 import lombok.Data;
+
+import java.util.List;
 
 @Data
 public class ImageDetailDto {
@@ -12,6 +15,7 @@ public class ImageDetailDto {
     private String postImage;
     private int likeCount;
     private boolean likeState;
+    private List<Comment> comments;
 
     public ImageDetailDto(Image image) {
         this.imageId = image.getId();
@@ -21,5 +25,6 @@ public class ImageDetailDto {
         this.postImage = image.getPostImageUrl();
         this.likeCount = image.getLikeCount();
         this.likeState = image.isLikeState();
+        this.comments = image.getComments();
     }
 }
