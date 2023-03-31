@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<link rel="stylesheet" href="story.css">
+<link rel="stylesheet" href="story.css" type="text/css">
 <%@ include file="../layout/header.jsp"%>
 
 
@@ -10,8 +10,11 @@
 			<div class="story-list__item">
 				<div class="sl__item__header">
 					<div>
-						<img class="profile-image" src="/upload/${detailDto.profileImage}"
-							onerror="this.src='/images/person.jpeg'" />
+					    <a href="<c:url value='/user/${comment.userId}'/>">
+						    <img class="profile-image" src="/upload/${detailDto.profileImage}"
+							onerror="this.src='/images/person.png'"/>
+						</a>
+
 					</div>
 					<div>${detailDto.name}</div>
 				</div>
@@ -22,21 +25,19 @@
 
 				<div class="sl__item__contents">
 					<div class="sl__item__contents__icon">
-
 						<button>
-
-					<c:choose>
-						<c:when test="${detailDto.likeState}">
-							<i class="fas fa-heart active" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
-						</c:when>
-						<c:otherwise>
-								<i class="far fa-heart" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
-						</c:otherwise>
-					</c:choose>
-						</button>
+                            <c:choose>
+                                <c:when test="${detailDto.likeState}">
+                                    <i class="fas fa-heart active" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike('${detailDto.imageId}')"></i>
+                                </c:when>
+                                <c:otherwise>
+                                    <i class="far fa-heart" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike('${detailDto.imageId}')"></i>
+                                </c:otherwise>
+                            </c:choose>
+                        </button>
 					</div>
 
-					<span class="like"><b id="LikeCount-${detailDto.imageId}">${detailDto.likeCount } </b>likes</span>
+					<span class="like"><b id="LikeCount-${detailDto.imageId}"> ${detailDto.likeCount} </b>likes</span>
 
 					<div class="sl__item__contents__content">
 						<p>${detailDto.caption}</p>
@@ -65,4 +66,4 @@
 	</section>
 </main>
 <script src="/js/profile.js"></script>
-<script src="/js/story.js"></script>
+<script src="/js/detail.js"></script>
