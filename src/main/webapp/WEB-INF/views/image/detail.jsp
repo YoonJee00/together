@@ -33,9 +33,6 @@
 								<i class="far fa-heart" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
 						</c:otherwise>
 					</c:choose>
-
-
-
 						</button>
 					</div>
 
@@ -50,7 +47,7 @@
 					        <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 					        <p><b>${comment.user.username} :</b> ${comment.content}</p>
 
-					            <c:if test="${principal.id eq comment.userId}">
+					            <c:if test="${principal.id eq comment.id}">
 					                <button onclick="deleteComment(${comment.id}, ${comment.userId})"><i class="fas fa-times"></i></button>
 					             </c:if>
 					        </div>
@@ -68,4 +65,4 @@
 	</section>
 </main>
 <script src="/js/profile.js"></script>
-<script src="/js/detail.js"></script>
+<script src="/js/story.js"></script>
