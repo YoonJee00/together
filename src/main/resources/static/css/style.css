@@ -175,24 +175,6 @@ span {
     border: 1px solid #c42727;
 }
 
-.login__kakao button {
-    background-color: #FEE500;
-    color: #fff;
-    width: 100%;
-    height: 30px;
-    border: 0;
-    font-weight: 600;
-    font-size: 15px;
-    border-radius: 6px;
-    padding-top: 2px;
-}
-
-.login__kakao button:hover {
-    background-color: #fff;
-    color: #FEE500;
-    border: 1px solid #FEE500;
-}
-
 /* 아이콘 사이즈 */
 
 .OAuth2_icon_size {
