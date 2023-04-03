@@ -58,8 +58,8 @@
 					        <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
 					        <p><b>${comment.user.username} :</b> ${comment.content}</p>
 
-					            <c:if test="${principal.id eq comment.userId}">
-					                <button onclick="deleteComment(${comment.id}, ${comment.userId})"><i class="fas fa-times"></i></button>
+					            <c:if test="${principal.id eq comment.user.id}">
+					                <button onclick="deleteComment(${comment.id}, ${comment.user.id})"><i class="fas fa-times"></i></button>
 					             </c:if>
 					        </div>
 					    </c:forEach>
