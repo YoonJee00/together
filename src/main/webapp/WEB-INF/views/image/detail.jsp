@@ -11,7 +11,7 @@
 				<div class="sl__item__header">
 					<div>
 						<img class="profile-image" src="/upload/${detailDto.profileImage}"
-							onerror="this.src='/images/person.jpeg'" />
+							onerror="this.src='/images/person.png'" />
 					</div>
 					<div>${detailDto.name}</div>
 				</div>
