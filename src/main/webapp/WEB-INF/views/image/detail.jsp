@@ -30,24 +30,19 @@
 
 				<div class="sl__item__contents">
 					<div class="sl__item__contents__icon">
-
 						<button>
-
-					<c:choose>
-						<c:when test="${detailDto.likeState}">
-							<i class="fas fa-heart active" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
-						</c:when>
-						<c:otherwise>
-								<i class="far fa-heart" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
-						</c:otherwise>
-					</c:choose>
-
-
-
+					        <c:choose>
+						        <c:when test="${detailDto.likeState}">
+						        	<i class="fas fa-heart active" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
+						        </c:when>
+						        <c:otherwise>
+								    <i class="far fa-heart" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
+						        </c:otherwise>
+					        </c:choose>
 						</button>
 					</div>
 
-					<span class="like"><b id="LikeCount-${detailDto.imageId}">${detailDto.likeCount } </b>likes</span>
+					<span class="like"><b id="LikeCount-${detailDto.imageId}">${detailDto.likeCount} </b>likes</span>
 
 					<div class="sl__item__contents__content">
 						<p>${detailDto.caption}</p>

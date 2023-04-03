@@ -18,12 +18,13 @@ public class ImageDetailDto {
     private List<Comment> comments;
 
     public ImageDetailDto(Image image) {
+
         this.imageId = image.getId();
         this.name = image.getUser().getName();
         this.profileImage = image.getUser().getProfileImageUrl();
         this.caption = image.getCaption();
         this.postImage = image.getPostImageUrl();
-        this.likeCount = image.getLikeCount();
+        this.likeCount = image.getLikes().size();
         this.likeState = image.isLikeState();
         this.comments = image.getComments();
     }
