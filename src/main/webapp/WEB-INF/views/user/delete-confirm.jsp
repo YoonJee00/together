@@ -1,5 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
-	pageEncoding="UTF-8"%>
+   pageEncoding="UTF-8"%>
 <html>
 <head>
     <title>회원 탈퇴</title>
@@ -36,8 +36,9 @@
     <input type="hidden" name="_csrf" value="${_csrf.token}"/>
     <input type="hidden" name="confirm" value="yes"/>
     <div>
+    <input type="password" name="password" placeholder="현재 비밀번호 입력" required/>
         <button type="submit">예</button>
-        <button type="button" onclick="history.back()">아니오</button>
+        <button type="button" onclick="history.back()">뒤로가기</button>
     </div>
 </form>
 
