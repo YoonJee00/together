@@ -9,7 +9,7 @@ import org.springframework.web.servlet.resource.PathResourceResolver;
 @Configuration
 public class WebMvcConfig implements WebMvcConfigurer { // web 설정 파일
 
-    @Value("${file.path}")
+    @Value("{file.path}")
     private String uploadFolder;
 
     @Override

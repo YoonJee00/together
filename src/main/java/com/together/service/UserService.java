@@ -34,7 +34,7 @@ public class UserService {
     private final CommentRepository commentRepository;
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
-    @Value("${file.path}")
+    @Value("{file.path}")
     private String uploadFolder;
 
     @Transactional
