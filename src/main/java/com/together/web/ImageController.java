@@ -60,7 +60,8 @@ public class ImageController {
 
     @PostMapping("image/{imageId}/delete") //게시물삭제
     public String deleteImage(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails principalDetails) {
-        imageService.deleteImage(imageId);
-        return "redirect:/user/" + principalDetails.getUser().getId();
+       imageService.deleteImage(imageId);
+       return "redirect:/user/" + principalDetails.getUser().getId();
+
     }
 }
