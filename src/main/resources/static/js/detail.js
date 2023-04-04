@@ -2,13 +2,16 @@ function toggleLike(imageId) {
 	let likeIcon = $(`#LikeIcon-${imageId}`);
 
 	if (likeIcon.hasClass("far")) { // 좋아요
-
+		// 좋아요 상태를 서버에 저장
 		$.ajax({
 			type: "post",
 			url: `/api/image/${imageId}/likes`,
 			dataType: "text"
 		}).done(res=>{
 			console.log(res);
+			// Local Storage 에 좋아요 상태 저장
+			localStorage.setItem(`likeState-${imageId}`, "true");
+
 			let likeCountStr = $(`#LikeCount-${imageId}`).text();
 			let likeCount = Number(likeCountStr) + 1;
 			$(`#LikeCount-${imageId}`).text(likeCount);
@@ -20,16 +23,17 @@ function toggleLike(imageId) {
 			console.log("오류", error);
 		});
 
-
-
 	} else { // 좋아요취소
-
+		// 좋아요 상태를 서버에서 삭제
 		$.ajax({
 			type: "delete",
 			url: `/api/image/${imageId}/likes`,
 			dataType: "text"
 		}).done(res=>{
 			console.log(res);
+			// Local Storage 에 좋아요 상태 저장
+			localStorage.setItem(`likeState-${imageId}`, "false");
+
 			let likeCountStr = $(`#LikeCount-${imageId}`).text();
 			let likeCount = Number(likeCountStr) - 1;
 			$(`#LikeCount-${imageId}`).text(likeCount);
@@ -40,10 +44,22 @@ function toggleLike(imageId) {
 		}).fail(error=>{
 			console.log("오류", error);
 		});
-
-
 	}
 }
+
+// 페이지 로드 시 Local Storage 에서 좋아요 상태를 불러와서 초기 설정
+$(document).ready(function() {
+    $("[id^='LikeIcon-']").each(function() {
+        let imageId = $(this).attr("id").split("-")[1];
+        let likeState = localStorage.getItem(`likeState-${imageId}`);
+        if (likeState === "true") {
+            $(this).addClass("fas active").removeClass("far");
+        } else {
+            $(this).removeClass("fas active").addClass("far");
+        }
+    });
+});
+
 
 function addComment(imageId) {
 
