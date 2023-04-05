@@ -30,6 +30,29 @@
         }
     </style>
 
+    <style>
+      /* 기본 링크 스타일 (검은색) */
+      a {
+        color: #000;
+        text-decoration: none;
+      }
+
+      /* 방문한 링크 스타일 (검은색) */
+      a:visited {
+        color: #000;
+      }
+
+      /* 클릭한 링크 스타일 (검은색) */
+      a:active {
+        color: #000;
+      }
+
+      /* 호버(마우스를 올렸을 때) 링크 스타일 (검은색) */
+      a:hover {
+        color: #FF8C00;
+      }
+    </style>
+
 </head>
 <body>
 <%@ include file="../layout/header.jsp"%>
