@@ -10,7 +10,8 @@
     <title>채팅</title>
     <style>
         .chating{
-            background-color: #FF8C00;
+            border-color: #FF8C00;
+            border-style: solid;
             width: 500px;
             height: 500px;
             overflow: auto;
