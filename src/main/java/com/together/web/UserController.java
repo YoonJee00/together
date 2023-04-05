@@ -2,9 +2,14 @@ package com.together.web;
 
 import com.together.config.auth.PrincipalDetails;
 import com.together.domain.user.User;
+import com.together.domain.user.UserRepository;
 import com.together.service.UserService;
+import com.together.web.dto.UserDto;
 import com.together.web.dto.UserProfileDto;
 import lombok.RequiredArgsConstructor;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.web.PageableDefault;
 import org.springframework.security.core.Authentication;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -18,6 +23,7 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
+import java.util.List;
 
 
 @RequiredArgsConstructor
@@ -45,13 +51,13 @@ public class UserController {
         return "user/update";
     }
 
-    @GetMapping("user/{id}/delete")
+    @GetMapping("/user/{id}/delete")
     public String delete(@PathVariable int id, Model model) {
         model.addAttribute("Id", id);
         return "user/delete-confirm";
     }
 
-    @PostMapping("user/{id}/delete")
+    @PostMapping("/user/{id}/delete")
     public String deleteUser(@PathVariable int id, @RequestParam String confirm, RedirectAttributes redirectAttributes) {
         if ("yes".equalsIgnoreCase(confirm)) {
             // 회원 탈퇴 처리
@@ -62,4 +68,10 @@ public class UserController {
         return "redirect:/user/" + id + "/delete";
     }
 
+    @GetMapping("members/memberList")
+    public String list (@RequestParam(value = "keyword", required = false) String keyword, Model model) { //회원 조회,검색
+        List<UserDto> members = userService.findMember(keyword);
+        model.addAttribute("members",members);
+        return "/members/memberList";
+    }
 }

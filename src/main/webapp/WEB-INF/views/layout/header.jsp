@@ -47,6 +47,9 @@
 
          <nav class="navi">
             <ul class="navi-list">
+               <li class="navi-item"><a href="/members/memberList">
+                     <i class="fas fa-search"></i>
+                  </a></li>
                <li class="navi-item"><a href="/">
                      <i class="fas fa-home"></i>
                   </a></li>

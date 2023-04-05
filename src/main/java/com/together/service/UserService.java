@@ -9,6 +9,7 @@ import com.together.domain.user.UserRepository;
 import com.together.handler.ex.CustomApiException;
 import com.together.handler.ex.CustomException;
 import com.together.handler.ex.CustomValidationApiException;
+import com.together.web.dto.UserDto;
 import com.together.web.dto.UserProfileDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
@@ -20,6 +21,8 @@ import org.springframework.web.multipart.MultipartFile;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -120,4 +123,25 @@ public class UserService {
         userRepository.deleteById(id);
     }
 
+    @Transactional
+    public List<UserDto> findMember(String keyword){ //회원 조회,검색
+        List<User> users = userRepository.findAllSearch(keyword);
+        List<UserDto> userDtoList = new ArrayList<>();
+
+        if(users.isEmpty()) return userDtoList;
+
+        for(User user : users) {
+            userDtoList.add(this.convertEntity(user));
+        }
+
+        return userDtoList;
+    }
+
+    @Transactional
+    private UserDto convertEntity(User user) {
+        return UserDto.builder()
+                .name(user.getName())
+                .username(user.getUsername())
+                .build();
+    }
 }
