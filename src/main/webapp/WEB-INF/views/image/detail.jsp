@@ -20,7 +20,7 @@
 					<form action="/image/${imageId}/delete" method="post">
                         <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                         <input type="hidden" name="confirm" value="yes"/>
-                        <div>
+                        <div style="display:flex; justify-content:flex-end;">
                             <button type="submit">삭제</button>
                         </div>
                     </form>
