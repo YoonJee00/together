@@ -47,10 +47,10 @@
          <th>이름</th>
       </tr>
       <c:forEach items="${members}" var="member">
-      <tr>
-         <td>${member.username}</td>
-         <td>${member.name}</td>
-      </tr>
+       <tr>
+           <td><a href="/user/${member.id}">${member.username}</a></td>
+           <td><a href="/user/${member.id}">${member.name}</a></td>
+       </tr>
       </c:forEach>
    </table>
    <div id="footer">

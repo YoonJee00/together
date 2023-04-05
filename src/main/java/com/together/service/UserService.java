@@ -140,8 +140,10 @@ public class UserService {
     @Transactional
     private UserDto convertEntity(User user) {
         return UserDto.builder()
+                .id(user.getId())
                 .name(user.getName())
                 .username(user.getUsername())
+                .profileImageUrl(user.getProfileImageUrl())
                 .build();
     }
 }
