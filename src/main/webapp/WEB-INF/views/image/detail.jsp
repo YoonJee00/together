@@ -9,10 +9,12 @@
 		<article class="story-list">
 			<div class="story-list__item">
 				<div class="sl__item__header">
-					<div>
-						<img class="profile-image" src="/upload/${detailDto.profileImage}"
-							onerror="this.src='/images/person.png'" />
-					</div>
+				    <a href="/user/${detailDto.id}">
+					    <div>
+						    <img class="profile-image" src="/upload/${detailDto.profileImage}"
+							    onerror="this.src='/images/person.png'" />
+					    </div>
+					</a>
 					<div>${detailDto.name}</div>
 				</div>
 

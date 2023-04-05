@@ -8,6 +8,7 @@ import java.util.List;
 
 @Data
 public class ImageDetailDto {
+    private int id;
     private int imageId;
     private String name;
     private String profileImage;
@@ -19,6 +20,7 @@ public class ImageDetailDto {
 
     public ImageDetailDto(Image image) {
 
+        this.id = image.getUser().getId();
         this.imageId = image.getId();
         this.name = image.getUser().getName();
         this.profileImage = image.getUser().getProfileImageUrl();

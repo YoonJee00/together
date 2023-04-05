@@ -28,9 +28,7 @@
             height: 50px; /* 적절한 높이로 수정해주세요 */
             background-color: lightgray;
         }
-    </style>
 
-    <style>
       /* 기본 링크 스타일 (검은색) */
       a {
         color: #000;
@@ -50,6 +48,13 @@
       /* 호버(마우스를 올렸을 때) 링크 스타일 (검은색) */
       a:hover {
         color: #FF8C00;
+      }
+
+      profile-image {
+        width: 40px;
+        height: 40px;
+        padding: 3px;
+        border: 2px solid #8a3ab8;
       }
     </style>
 
@@ -71,6 +76,8 @@
       </tr>
       <c:forEach items="${members}" var="member">
        <tr>
+            <td><img class="profile-image" src="/members/${member.profileImageUrl}"
+                   onerror="this.src='/images/person.png'" /></td>
            <td><a href="/user/${member.id}">${member.username}</a></td>
            <td><a href="/user/${member.id}">${member.name}</a></td>
        </tr>
