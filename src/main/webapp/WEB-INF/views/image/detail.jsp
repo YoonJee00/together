@@ -53,7 +53,7 @@
 					<div id="storyCommentList-${detailDto.imageId}">
 					    <c:forEach var="comment" items="${detailDto.comments}">
 					        <div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
-					        <p><b>${comment.user.username} :</b> ${comment.content}</p>
+					        <p><b>${comment.user.name} :</b> ${comment.content}</p>
 
 					            <c:if test="${principal.id eq comment.user.id}">
 					                <button onclick="deleteComment(${comment.id}, ${comment.user.id})"><i class="fas fa-times"></i></button>
@@ -73,4 +73,4 @@
 	</section>
 </main>
 <script src="/js/profile.js"></script>
-<script src="/js/detail.js"></script>
+<script src="/js/story.js"></script>
