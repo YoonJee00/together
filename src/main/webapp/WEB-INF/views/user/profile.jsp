@@ -3,6 +3,24 @@
 
 <%@ include file="../layout/header.jsp"%>
 
+<style>
+user-info {
+  display: flex;
+  align-items: center;
+}
+
+h2 {
+  margin-right: 10px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+h4 {
+  margin: 0;
+}
+</style
+
 <!--프로필 섹션-->
 <section class="profile">
 	<!--유저정보 컨테이너-->
@@ -28,8 +46,12 @@
 		<!--유저정보 및 사진등록 구독하기-->
 		<div class="profile-right">
 			<div class="name-group">
-				<h2>${dto.user.name}</h2>
-
+				<div class="user-info">
+                  <h2>${dto.user.name}</h2>
+                  <h4>(${dto.user.username})</h4>
+                </div>
+            </div>
+            <div class="name-group">
 				<c:choose>
 					<c:when test="${dto.pageOwnerState}">
 						<button class="cta" onclick="location.href='/image/upload'">사진등록</button>
@@ -43,8 +65,6 @@
 								<button class="cta" onclick="toggleSubscribe(${dto.user.id}, this)">구독하기</button>
 							</c:otherwise>
 						</c:choose>
-
-
 					</c:otherwise>
 				</c:choose>
 
