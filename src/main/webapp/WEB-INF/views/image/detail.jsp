@@ -35,10 +35,10 @@
 						<button>
 					        <c:choose>
 						        <c:when test="${detailDto.likeState}">
-						        	<i class="far fa-heart" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
+						        	<i class="fas fa-heart active" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
 						        </c:when>
 						        <c:otherwise>
-								    <i class="fas fa-heart active" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
+								    <i class="far fa-heart" id="LikeIcon-${detailDto.imageId}" onclick="toggleLike(${detailDto.imageId})"></i>
 						        </c:otherwise>
 					        </c:choose>
 						</button>
