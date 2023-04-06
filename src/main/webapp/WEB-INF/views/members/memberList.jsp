@@ -50,11 +50,9 @@
         color: #FF8C00;
       }
 
-      profile-image {
-        width: 40px;
-        height: 40px;
-        padding: 3px;
-        border: 2px solid #8a3ab8;
+      .profile-image {
+              max-width: 50px; /* 원하는 최대 너비 설정 */
+              max-height: 50px; /* 원하는 최대 높이 설정 */
       }
     </style>
 
@@ -71,12 +69,13 @@
    </div>
    <table>
       <tr>
+        <th>프로필 사진</th>
          <th>유저네임</th>
          <th>이름</th>
       </tr>
       <c:forEach items="${members}" var="member">
        <tr>
-            <td><img class="profile-image" src="/members/${member.profileImageUrl}"
+            <td><img class="profile-image" src="${member.profileImageUrl}"
                    onerror="this.src='/images/person.png'" /></td>
            <td><a href="/user/${member.id}">${member.username}</a></td>
            <td><a href="/user/${member.id}">${member.name}</a></td>
