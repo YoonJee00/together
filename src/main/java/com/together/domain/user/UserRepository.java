@@ -11,5 +11,6 @@ public interface UserRepository extends JpaRepository<User,Integer> {
 
     @Query(value = "SELECT b FROM User b WHERE b.username LIKE %:keyword% OR b.name LIKE %:keyword%"
     )
+
     List<User> findAllSearch(String keyword);
 }

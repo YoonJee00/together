@@ -8,4 +8,5 @@ public interface CommentRepository extends JpaRepository<Comment, Integer> {
 
     void deleteAllByUserId(int userId);
 
+    void deleteAllByImageId(int imageId);
 }

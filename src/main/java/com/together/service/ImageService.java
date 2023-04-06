@@ -84,6 +84,8 @@ public class ImageService {
 
     @Transactional
     public void deleteImage(int imageId) {
+        likesRepository.deleteAllByImageId(imageId);
+        commentRepository.deleteAllByImageId(imageId);
         imageRepository.deleteById(imageId);
     }
 }

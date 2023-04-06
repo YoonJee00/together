@@ -24,4 +24,5 @@ public interface ImageRepository extends JpaRepository<Image, Integer> {
     Image imageDetail(@Param("imageId") int imageId, @Param("principalId") int principalId);
 
     void deleteById(int imageId);
+
 }

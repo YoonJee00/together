@@ -15,4 +15,6 @@ public interface LikesRepository extends JpaRepository<Likes, Integer> {
     int mUnLikes(int imageId, int principalId);
 
     void deleteAllByUserId(int userId);
+
+    void deleteAllByImageId(int imageId);
 }
