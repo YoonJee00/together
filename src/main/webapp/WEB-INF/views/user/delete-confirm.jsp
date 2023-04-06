@@ -40,8 +40,12 @@
                             <input type="hidden" name="_csrf" value="${_csrf.token}"/>
                             <input type="hidden" name="confirm" value="yes"/>
                             <input type="password" name="password" placeholder="비밀번호 입력" required="required" />
-                            <input type="password" name="password" placeholder="비밀번호 확인" required="required" />
-                            <div style="display: flex; justify-content: space-around; width: 100%; margin: 0 auto;">
+                            <input type="password" name="confirm_password" placeholder="비밀번호 확인" required="required" />
+                            <c:if test="${not empty error}"> <!-- sessionScope 에서 error 대신에 error만 사용 -->
+                                <div class="error" style="font-size: 10pt;">${error}</div> <!-- sessionScope에서 error 대신에 error만 사용 -->
+                                <% session.removeAttribute("error"); %> <!-- 에러 메시지를 사용한 후에 세션에서 제거 -->
+                            </c:if>
+                            <div style="display: flex; justify-content: space-around; width: 100%; margin: 10 auto;">
                               <button type="submit" style="width: 40%; height: 30px;">탈퇴하기</button>
                               <button type="button" style="width: 40%; height: 30px;" onclick="history.back()">뒤로가기</button>
                             </div>

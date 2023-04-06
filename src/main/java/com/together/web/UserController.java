@@ -31,6 +31,9 @@ import java.util.List;
 public class UserController {
 
     private final UserService userService;
+
+    private UserRepository userRepository;
+
     private final BCryptPasswordEncoder bCryptPasswordEncoder;
 
     @GetMapping("/user/{pageUserid}")
@@ -58,14 +61,15 @@ public class UserController {
     }
 
     @PostMapping("/user/{id}/delete")
-    public String deleteUser(@PathVariable int id, @RequestParam String confirm, RedirectAttributes redirectAttributes) {
-        if ("yes".equalsIgnoreCase(confirm)) {
-            // 회원 탈퇴 처리
-            userService.deleteUserById(id);
+    public String deleteUser(@PathVariable int id, @RequestParam String confirm, @RequestParam String password, RedirectAttributes redirectAttributes) {
+        try {
+            userService.deleteUserById(id, password); // 회원 탈퇴 처리
             redirectAttributes.addFlashAttribute("message", "회원 탈퇴가 완료되었습니다.");
             return "redirect:/auth/signin";
+        } catch (IllegalArgumentException e) {
+            redirectAttributes.addFlashAttribute("error", "비밀번호가 일치하지 않습니다."); // 에러 메시지 설정
+            return "redirect:/user/" + id + "/delete";
         }
-        return "redirect:/user/" + id + "/delete";
     }
 
     @GetMapping("members/memberList")
@@ -73,5 +77,11 @@ public class UserController {
         List<UserDto> members = userService.findMember(keyword);
         model.addAttribute("members",members);
         return "/members/memberList";
+    }
+
+    @GetMapping("/users/{id}")
+    public User getUserById(@PathVariable int id) {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new IllegalArgumentException("해당 id에 해당하는 유저가 없습니다."));
     }
 }

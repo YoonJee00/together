@@ -23,6 +23,7 @@ import java.nio.file.Path;
 import java.nio.file.Paths;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.UUID;
 
 @RequiredArgsConstructor
@@ -113,7 +114,13 @@ public class UserService {
     }
 
     @Transactional
-    public void deleteUserById(int id) {
+    public void deleteUserById(int id, String password) {
+        User user = getUserById(id);
+
+        if (!bCryptPasswordEncoder.matches(password, user.getPassword())) {
+            throw new IllegalArgumentException("비밀번호가 일치하지 않습니다.");
+        }
+
         subscribeRepository.deleteAllByFromUserId(id);
         subscribeRepository.deleteAllByToUserId(id);
         imageRepository.deleteAllByUserId(id);
@@ -145,5 +152,14 @@ public class UserService {
                 .username(user.getUsername())
                 .profileImageUrl(user.getProfileImageUrl())
                 .build();
+    }
+
+    public User getUserById(int id) {
+        Optional<User> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) {
+            return optionalUser.get();
+        } else {
+            throw new IllegalArgumentException("사용자를 찾을 수 없습니다."); // 예외 처리
+        }
     }
 }
