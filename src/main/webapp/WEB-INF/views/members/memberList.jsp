@@ -51,9 +51,10 @@
       }
 
       .profile-image {
-              max-width: 50px; /* 원하는 최대 너비 설정 */
-              max-height: 50px; /* 원하는 최대 높이 설정 */
-      }
+              width: 50px; /* 원하는 최대 너비 설정 */
+              height: 50px; /* 원하는 최대 높이 설정 */
+              border-radius: 50%; /* 동그랗게 만들기 */
+       }
     </style>
 
 </head>
@@ -75,7 +76,7 @@
       </tr>
       <c:forEach items="${members}" var="member">
        <tr>
-            <td><img class="profile-image" src="${member.profileImageUrl}"
+            <td><img class="profile-image" src="/upload/${member.profileImageUrl}"
                    onerror="this.src='/images/person.png'" /></td>
            <td><a href="/user/${member.id}">${member.username}</a></td>
            <td><a href="/user/${member.id}">${member.name}</a></td>
