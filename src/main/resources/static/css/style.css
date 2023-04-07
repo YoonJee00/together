@@ -204,3 +204,17 @@ span {
   background: #FFA500 !important;
   color: #fff !important;
 }
+
+.pointer {
+	cursor: pointer;
+}
+
+.exception {
+	font-size: 14px;
+	line-height: 18px;
+	text-align: center;
+	color: #ED4956;
+	height: 18px;
+	width: 268px;
+	margin: 14px 0px 14px 0px;
+}
