@@ -55,6 +55,13 @@
                         </div>
 
                         <!-- Oauth 소셜로그인end -->
+
+                        <div align="center">
+                        	<c:if test="${error}">
+                        		<p class="exception">${exception}</p>
+                        	</c:if>
+                        </div>
+
                     </div>
 
                     <!--계정이 없으신가요?-->

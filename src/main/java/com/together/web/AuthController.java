@@ -7,12 +7,14 @@ import lombok.RequiredArgsConstructor;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.validation.BindingResult;
 import org.springframework.validation.FieldError;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 
 import com.together.web.dto.SignupDto;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -31,12 +33,17 @@ public class AuthController {
     private final AuthService authService;
 
     @GetMapping("/auth/signin")
-    public String signinForm() {
+    public String signinForm(@RequestParam(value = "error", required = false) String error, @RequestParam(value = "exception", required = false) String exception, Model model) {
+
+        model.addAttribute("error", error);
+        model.addAttribute("exception", exception);
+
         return "auth/signin";
     }
 
     @GetMapping("/auth/signup")
     public String signupForm() {
+
         return "auth/signup";
     }
 
