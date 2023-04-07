@@ -1,10 +1,10 @@
 /**
-   2. 스토리 페이지
-   (1) 스토리 로드하기
-   (2) 스토리 스크롤 페이징하기
-   (3) 좋아요, 안좋아요
-   (4) 댓글쓰기
-   (5) 댓글삭제
+ 2. 스토리 페이지
+ (1) 스토리 로드하기
+ (2) 스토리 스크롤 페이징하기
+ (3) 좋아요, 안좋아요
+ (4) 댓글쓰기
+ (5) 댓글삭제
  */
 
 // (0) 현재 로긴한 사용자 아이디
@@ -23,8 +23,33 @@ function storyLoad() {
          let storyItem = getStoryItem(image);
          $("#storyList").append(storyItem);
       });
+      //로그인과 동시에 이벤트 등록
+      notification();
    }).fail(error => {
       console.log("오류", error);
+   });
+}
+
+//notification
+function notification() {
+   let eventSource = new EventSource("http://localhost:80/sub");
+
+   eventSource.addEventListener("notification", function(event) {
+      let message = event.data;
+
+      let notification_content = document.getElementById('notification-content');
+      let notification_container = document.getElementById('notification-container');
+
+      notification_content.textContent = message;
+
+      notification_container.classList.add('show');
+      setTimeout(() => {
+         notification_container.classList.remove('show');
+      }, 2000);
+   });
+
+   eventSource.addEventListener("error", function(event) {
+      eventSource.close();
    });
 }
 
@@ -49,14 +74,14 @@ function getStoryItem(image) {
 
          <button>`;
 
-              if(image.likeState){
-               item += `<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
-            }else{
-               item += `<i class="far fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
-            }
+   if(image.likeState){
+      item += `<i class="fas fa-heart active" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+   }else{
+      item += `<i class="far fa-heart" id="storyLikeIcon-${image.id}" onclick="toggleLike(${image.id})"></i>`;
+   }
 
 
-      item += `
+   item += `
          </button>
       </div>
 
@@ -68,25 +93,25 @@ function getStoryItem(image) {
 
       <div id="storyCommentList-${image.id}">`;
 
-         image.comments.forEach((comment)=>{
-            item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
+   image.comments.forEach((comment)=>{
+      item +=`<div class="sl__item__contents__comment" id="storyCommentItem-${comment.id}">
             <p>
                <b>${comment.user.name} :</b> ${comment.content}
             </p>`;
 
-            if(principalId == comment.user.id){
-               item += `   <button onclick="deleteComment(${comment.id})">
+      if(principalId == comment.user.id){
+         item += `   <button onclick="deleteComment(${comment.id})">
                               <i class="fas fa-times"></i>
                            </button>`;
-            }
-
-         item += `
-         </div>`;
-
-         });
-
+      }
 
       item += `
+         </div>`;
+
+   });
+
+
+   item += `
       </div>
 
       <div class="sl__item__input">
@@ -100,7 +125,7 @@ function getStoryItem(image) {
 }
 
 function goToProfile(userId) {
-    location.href = `/user/${userId}`;
+   location.href = `/user/${userId}`;
 }
 
 // (2) 스토리 스크롤 페이징하기
@@ -229,7 +254,16 @@ function deleteComment(commentId) {
    });
 }
 
+/* 상태창, 알림창 스크롤 따라오기 */
+$(document).ready(function() {
+   let currentStatusPosition = parseInt($(".story-status").css("top"));
+   let currentNotificationPosition = parseInt($(".notification-container").css("top"));
 
-
+   $(window).scroll(function() {
+      let position = $(window).scrollTop();
+      $(".story-status").stop().animate({ "top": position + currentStatusPosition + "px" }, 500);
+      $(".notification-container").stop().animate({ "top": position + currentNotificationPosition + "px" }, 500);
+   });
+});
 
 
