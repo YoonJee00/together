@@ -76,7 +76,7 @@
       </tr>
       <c:forEach items="${members}" var="member">
        <tr>
-            <td><img class="profile-image" src="/upload/${member.profileImageUrl}"
+            <td><a href="/user/${member.id}"><img class="profile-image" src="/upload/${member.profileImageUrl}"
                    onerror="this.src='/images/person.png'" /></td>
            <td><a href="/user/${member.id}">${member.username}</a></td>
            <td><a href="/user/${member.id}">${member.name}</a></td>
