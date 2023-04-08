@@ -56,7 +56,7 @@
                <li class="navi-item"><a href="/image/popular">
                      <i class="far fa-compass"></i>
                   </a></li>
-               <li class="navi-item"><a href="/image/chat">
+               <li class="navi-item"><a href="/image/room">
                      <i class="fas fa-smile"></i>
                   </a></li>
                <li class="navi-item"><a href="/user/${principal.user.id}">

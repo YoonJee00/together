@@ -1,4 +1,4 @@
-package com.together.domain.chating;
+package com.together.domain;
 
 public class Room {
     int roomNumber;
