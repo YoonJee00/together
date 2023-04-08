@@ -6,6 +6,7 @@ import org.springframework.data.jpa.repository.Modifying;
 import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
+import java.util.List;
 import java.util.Optional;
 
 public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
@@ -25,4 +26,12 @@ public interface SubscribeRepository extends JpaRepository<Subscribe, Integer> {
 
     void deleteAllByFromUserId(int fromUserId);
     void deleteAllByToUserId(int toUserId);
+
+    /* 내가 구독한 사용자 */
+    @Query(value = "SELECT toUserId FROM subscribe WHERE fromUserId = :principalId", nativeQuery = true)
+    List<Integer> findSubscribeFrom(int principalId);
+
+    /* 나를 구독한 사용자 */
+    @Query(value = "SELECT fromUserId FROM subscribe WHERE toUserId = :principalId", nativeQuery = true)
+    List<Integer> findSubscribeTo(int principalId);
 }

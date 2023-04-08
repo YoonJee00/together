@@ -13,4 +13,7 @@ public interface UserRepository extends JpaRepository<User,Integer> {
     )
 
     List<User> findAllSearch(String keyword);
+
+    @Query(value = "SELECT * FROM user WHERE id = :id", nativeQuery = true)
+    User findByUserId(int id);
 }

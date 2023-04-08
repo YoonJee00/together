@@ -2,6 +2,9 @@ package com.together.web;
 
 import com.together.config.auth.PrincipalDetails;
 import com.together.domain.image.Image;
+import com.together.domain.subscribe.SubscribeRepository;
+import com.together.domain.user.User;
+import com.together.domain.user.UserRepository;
 import com.together.handler.ex.CustomValidationException;
 import com.together.service.ImageService;
 import com.together.web.dto.ImageDetailDto;
@@ -16,6 +19,7 @@ import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @RequiredArgsConstructor
@@ -23,9 +27,22 @@ import java.util.List;
 public class ImageController {
 
     private final ImageService imageService;
+    private final SubscribeRepository subscribeRepository;
+    private final UserRepository userRepository;
 
+    /* 스토리 페이지 */
     @GetMapping({"/", "/image/story"})
-    public String story() {
+    public String story(Model model, @AuthenticationPrincipal PrincipalDetails principalDetails) {
+        List<Integer> subList = subscribeRepository.findSubscribeFrom(principalDetails.getUser().getId());
+        List<User> subUserList = new ArrayList<User>();
+
+        /* 현재 로그인한 사용자가 구독한 사용자 목록 */
+        for (int id : subList) {
+            subUserList.add(userRepository.findByUserId(id));
+        }
+
+        model.addAttribute("subUserList", subUserList);
+
         return "image/story";
     }
 
