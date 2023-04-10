@@ -34,14 +34,17 @@
 <body>
 <%@ include file="../layout/header.jsp"%>
 
-<h2>유저 검색</h2>
-<h2>글 검색</h2>
+    <div>
+        <button id="userSearchButton">유저 검색</button>
+    </div>
 
-	<div>
-	</div>
+    <div>
+        <button id="writingsSearchButton">글 검색</button>
+    </div>
 
 	<div id="footer">
         <%@ include file="../layout/footer.jsp"%>
     </div>
 </body>
 </html>
+<script src="/js/search.js"></script>
