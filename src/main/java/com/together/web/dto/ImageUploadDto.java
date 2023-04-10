@@ -2,9 +2,10 @@ package com.together.web.dto;
 
 import com.together.domain.image.Image;
 import com.together.domain.user.User;
+import lombok.Builder;
 import lombok.Data;
 import org.springframework.web.multipart.MultipartFile;
-
+@Builder
 @Data
 public class ImageUploadDto {
     private MultipartFile file;

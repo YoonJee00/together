@@ -1,5 +1,6 @@
 package com.together.domain.image;
 
+import com.together.domain.user.User;
 import org.springframework.data.domain.Page;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
@@ -25,4 +26,7 @@ public interface ImageRepository extends JpaRepository<Image, Integer> {
 
     void deleteById(int imageId);
 
+    @Query(value = "SELECT b FROM Image b WHERE b.caption LIKE %:keyword%"
+    )
+    List<Image> findPostSearch(String keyword);
 }

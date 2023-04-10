@@ -17,6 +17,7 @@ import org.springframework.transaction.annotation.Transactional;
 import java.nio.file.Files;
 import java.nio.file.Path;
 import java.nio.file.Paths;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
@@ -87,5 +88,26 @@ public class ImageService {
         likesRepository.deleteAllByImageId(imageId);
         commentRepository.deleteAllByImageId(imageId);
         imageRepository.deleteById(imageId);
+    }
+
+    @Transactional
+    public List<ImageUploadDto> findPost(String keyword) {
+        List<Image> images = imageRepository.findPostSearch(keyword);
+        List<ImageUploadDto>imageUploadDtoList = new ArrayList<>();
+
+        if(images.isEmpty()) return  imageUploadDtoList;
+
+        for(Image image : images) {
+            imageUploadDtoList.add(this.postEntity(image));
+        }
+
+        return imageUploadDtoList;
+    }
+
+    @Transactional
+    private ImageUploadDto postEntity(Image image) {
+        return ImageUploadDto.builder()
+                .caption(image.getCaption())
+                .build();
     }
 }

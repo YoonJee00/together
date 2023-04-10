@@ -72,6 +72,11 @@ public class UserController {
         }
     }
 
+    @GetMapping({"/members/search"})
+    public String searchLink() {
+        return "members/search";
+    }
+
     @GetMapping("members/memberList")
     public String list (@RequestParam(value = "keyword", required = false) String keyword, Model model) { //회원 조회,검색
         List<UserDto> members = userService.findMember(keyword);

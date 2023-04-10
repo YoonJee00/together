@@ -81,4 +81,11 @@ public class ImageController {
        return "redirect:/user/" + principalDetails.getUser().getId();
 
     }
+
+    @GetMapping("members/postList")
+    public String listPost(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        List<ImageUploadDto> posts = imageService.findPost(keyword);
+        model.addAttribute("posts", posts);
+        return "/members/postList";
+    }
 }
