@@ -8,6 +8,7 @@ import org.springframework.web.multipart.MultipartFile;
 @Builder
 @Data
 public class ImageUploadDto {
+    private int imageId;
     private MultipartFile file;
     private String caption;
 
@@ -17,5 +18,9 @@ public class ImageUploadDto {
                 .postImageUrl(postImageUrl)
                 .user(user)
                 .build();
+    }
+
+    public void setImageId(int imageId) {
+        this.imageId = imageId;
     }
 }

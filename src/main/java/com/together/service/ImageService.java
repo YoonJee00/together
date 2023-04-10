@@ -93,19 +93,23 @@ public class ImageService {
     @Transactional
     public List<ImageUploadDto> findPost(String keyword) {
         List<Image> images = imageRepository.findPostSearch(keyword);
-        List<ImageUploadDto>imageUploadDtoList = new ArrayList<>();
+        List<ImageUploadDto> imageUploadDtoList = new ArrayList<>();
 
-        if(images.isEmpty()) return  imageUploadDtoList;
+        if (images.isEmpty()) return imageUploadDtoList;
 
-        for(Image image : images) {
-            imageUploadDtoList.add(this.postEntity(image));
+        for (Image image : images) {
+            ImageUploadDto post = ImageUploadDto.builder()
+                    .caption(image.getCaption())
+                    .build();
+            post.setImageId(image.getId()); // detailDto의 imageId 설정
+            imageUploadDtoList.add(post);
         }
 
         return imageUploadDtoList;
     }
 
     @Transactional
-    private ImageUploadDto postEntity(Image image) {
+    public ImageUploadDto postEntity(Image image) {
         return ImageUploadDto.builder()
                 .caption(image.getCaption())
                 .build();
