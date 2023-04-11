@@ -46,9 +46,9 @@
 			<th>내용</th>
 		</tr>
 		<c:forEach items="${posts}" var="post">
-		<tr>
-			<td><a href="/image/${post}">${post.caption}</a></td>
-		</tr>
+			<tr>
+				<td><a href="/image/${post.caption}">${post.caption}</a></td>
+			</tr>
 		</c:forEach>
 	</table>
 	<div id="footer">
