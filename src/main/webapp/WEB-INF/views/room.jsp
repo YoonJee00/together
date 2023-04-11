@@ -14,7 +14,8 @@
 		}
 		.container{
 			margin: 0 auto;
-			padding: 25px
+			padding: 25px;
+			width: 650px;
 		}
 		.container h1{
 			text-align: left;
