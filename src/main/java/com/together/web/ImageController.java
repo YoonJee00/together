@@ -72,6 +72,7 @@ public class ImageController {
     public String detailImage(@PathVariable int imageId, @AuthenticationPrincipal PrincipalDetails principalDetails, Model model) {
         ImageDetailDto imageDetailDto = imageService.detailImage(imageId, principalDetails.getId());
         model.addAttribute("detailDto", imageDetailDto);
+        //model.addAttribute("userDto", user )
         return "image/detail";
     }
 

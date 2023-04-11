@@ -33,7 +33,6 @@ public class Image {
 
     private LocalDateTime createDate;
 
-    @Transient
     private boolean likeState;
 
     @Transient

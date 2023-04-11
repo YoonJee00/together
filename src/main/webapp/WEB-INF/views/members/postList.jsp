@@ -47,7 +47,7 @@
 		</tr>
 		<c:forEach items="${posts}" var="post">
 		<tr>
-			<td><a href="/image/${post.imageId}">${post.caption}</a></td>
+			<td><a href="/image/${post}">${post.caption}</a></td>
 		</tr>
 		</c:forEach>
 	</table>

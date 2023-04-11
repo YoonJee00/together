@@ -156,6 +156,8 @@ function toggleLike(imageId) {
          dataType: "json"
       }).done(res=>{
 
+         localStorage.setItem(`likeState-${imageId}`, "true");
+
          let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
          let likeCount = Number(likeCountStr) + 1;
          $(`#storyLikeCount-${imageId}`).text(likeCount);
@@ -176,6 +178,8 @@ function toggleLike(imageId) {
          url: `/api/image/${imageId}/likes`,
          dataType: "json"
       }).done(res=>{
+
+         localStorage.setItem(`likeState-${imageId}`, "false");
 
          let likeCountStr = $(`#storyLikeCount-${imageId}`).text();
          let likeCount = Number(likeCountStr) - 1;

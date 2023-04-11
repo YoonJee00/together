@@ -101,7 +101,6 @@ public class ImageService {
             ImageUploadDto post = ImageUploadDto.builder()
                     .caption(image.getCaption())
                     .build();
-            post.setImageId(image.getId()); // detailDto의 imageId 설정
             imageUploadDtoList.add(post);
         }
 

@@ -17,13 +17,16 @@
 					</a>
 					<div>${detailDto.name}</div>
 
-					<form action="/image/${imageId}/delete" method="post">
-                        <input type="hidden" name="_csrf" value="${_csrf.token}"/>
-                        <input type="hidden" name="confirm" value="yes"/>
-                        <div style="display:flex; justify-content:flex-end;">
-                            <button type="submit">삭제</button>
-                        </div>
-                    </form>
+					<c:if test="${detailDto.id eq principal.user.id}">
+						<form action="/image/${imageId}/delete" method="post">
+							<input type="hidden" name="_csrf" value="${_csrf.token}"/>
+							<input type="hidden" name="confirm" value="yes"/>
+							<div style="display:flex; justify-content:flex-end;">
+								<button type="submit">삭제</button>
+							</div>
+						</form>
+					</c:if>
+
 				</div>
 
 				<div class="sl__item__img">
