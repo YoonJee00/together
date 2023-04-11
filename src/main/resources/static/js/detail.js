@@ -52,7 +52,7 @@ $(document).ready(function() {
     $("[id^='LikeIcon-']").each(function() {
         let imageId = $(this).attr("id").split("-")[1];
         let likeState = localStorage.getItem(`likeState-${imageId}`);
-        //if(likeState === null) return;
+        if(likeState === null) return;
 
         if (likeState === "true") {
             $(this).addClass("fas active").removeClass("far");
