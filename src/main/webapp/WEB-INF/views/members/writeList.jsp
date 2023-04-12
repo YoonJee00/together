@@ -42,9 +42,6 @@
 		</form>
 	</div>
 	<table>
-		<tr>
-			<th>내용</th>
-		</tr>
 		<c:forEach items="${writes}" var="write">
 		<tr>
 			<td><a href="/image/${write.imageId}">${write.caption}</a></td>
