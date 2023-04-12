@@ -69,11 +69,6 @@
       </form>
    </div>
    <table>
-      <tr>
-        <th>프로필 사진</th>
-         <th>유저네임</th>
-         <th>이름</th>
-      </tr>
       <c:forEach items="${members}" var="member">
        <tr>
             <td><a href="/user/${member.id}"><img class="profile-image" src="/upload/${member.profileImageUrl}"
