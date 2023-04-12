@@ -85,8 +85,8 @@ public class ImageController {
 
     @GetMapping("members/postList")
     public String listPost(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
-        List<ImageUploadDto> posts = imageService.findPost(keyword);
-        model.addAttribute("posts", posts);
+        List<ImageUploadDto> post = imageService.findPost(keyword);
+        model.addAttribute("posts", post);
         return "/members/postList";
     }
 }

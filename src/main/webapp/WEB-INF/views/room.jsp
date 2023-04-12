@@ -14,6 +14,7 @@
 		}
 		.container{
 			margin: 0 auto;
+			width: 650px;
 			padding: 25px
 		}
 		.container h1{
