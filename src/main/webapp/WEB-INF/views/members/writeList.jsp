@@ -36,7 +36,7 @@
 
 <h2>글 검색</h2>
 	<div>
-		<form action="/members/postList" method="GET">
+		<form action="/members/writeList" method="GET">
 			<input type="text" name="keyword" placeholder="글 내용을 입력해주세요">
 			<button type="submit">검색</button>
 		</form>
@@ -45,9 +45,9 @@
 		<tr>
 			<th>내용</th>
 		</tr>
-		<c:forEach items="${posts}" var="posts">
+		<c:forEach items="${writes}" var="write">
 		<tr>
-			<td><a href="/image/${posts}">${post.caption}</a></td>
+			<td><a href="/image/${write.imageId}">${write.caption}</a></td>
 		</tr>
 		</c:forEach>
 	</table>

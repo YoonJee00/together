@@ -7,6 +7,7 @@ import com.together.domain.image.ImageRepository;
 import com.together.domain.likes.LikesRepository;
 import com.together.web.dto.ImageDetailDto;
 import com.together.web.dto.ImageUploadDto;
+import com.together.web.dto.WriteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.data.domain.Page;
@@ -91,25 +92,27 @@ public class ImageService {
     }
 
     @Transactional
-    public List<ImageUploadDto> findPost(String keyword) {
-        List<Image> images = imageRepository.findPostSearch(keyword);
-        List<ImageUploadDto> imageUploadDtoList = new ArrayList<>();
+    public List<WriteDto> findWrite(String keyword) { //글검색
+        List<Image> images = imageRepository.findWriteSearch(keyword);
+        List<WriteDto> writeDtoList = new ArrayList<>();
 
-        if (images.isEmpty()) return imageUploadDtoList;
+        if (images.isEmpty()) return writeDtoList;
 
         for (Image image : images) {
-            ImageUploadDto post = ImageUploadDto.builder()
+            WriteDto post = WriteDto.builder()
+                    .imageId(image.getId())
                     .caption(image.getCaption())
                     .build();
-            imageUploadDtoList.add(post);
+            writeDtoList.add(this.WriteEntity(image));
         }
 
-        return imageUploadDtoList;
+        return writeDtoList;
     }
 
     @Transactional
-    public ImageUploadDto postEntity(Image image) {
-        return ImageUploadDto.builder()
+    public WriteDto WriteEntity(Image image) {
+        return WriteDto.builder()
+                .imageId(image.getId())
                 .caption(image.getCaption())
                 .build();
     }

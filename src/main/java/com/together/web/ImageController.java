@@ -9,6 +9,7 @@ import com.together.handler.ex.CustomValidationException;
 import com.together.service.ImageService;
 import com.together.web.dto.ImageDetailDto;
 import com.together.web.dto.ImageUploadDto;
+import com.together.web.dto.WriteDto;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.core.annotation.AuthenticationPrincipal;
 import org.springframework.stereotype.Controller;
@@ -83,10 +84,10 @@ public class ImageController {
 
     }
 
-    @GetMapping("members/postList")
-    public String listPost(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
-        List<ImageUploadDto> post = imageService.findPost(keyword);
-        model.addAttribute("posts", post);
-        return "/members/postList";
+    @GetMapping("members/writeList")
+    public String listWrite(@RequestParam(value = "keyword", required = false) String keyword, Model model) {
+        List<WriteDto> writes = imageService.findWrite(keyword);
+        model.addAttribute("writes", writes);
+        return "/members/writeList";
     }
 }

@@ -28,5 +28,5 @@ public interface ImageRepository extends JpaRepository<Image, Integer> {
 
     @Query(value = "SELECT b FROM Image b WHERE b.caption LIKE %:keyword%"
     )
-    List<Image> findPostSearch(String keyword);
+    List<Image> findWriteSearch(String keyword);
 }
