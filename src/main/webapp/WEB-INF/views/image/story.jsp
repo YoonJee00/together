@@ -18,7 +18,7 @@
 				<table>
 					<tr>
 						<td>
-							<img class="profile-image" src="/upload/${principal.user.profileImageUrl}"
+							<img class="profile-image" src="/upload/${principal.user.profileImageUrl}" onclick="location.href='/user/${principal.user.id}'"
 								 onerror="this.src='/images/person.png'" />
 						</td>
 						<td>
@@ -37,8 +37,10 @@
 						<table>
 							<tr>
 								<td>
-									<img class="profile-image" src="/upload/${subUser.profileImageUrl}"
+									<div onclick="location.href='/user/${subUser.id}'">
+										<img class="profile-image" src="/upload/${subUser.profileImageUrl}"
 										 onerror="this.src='/images/person.png'" />
+									</div>
 								</td>
 								<td>
 									<div class="story-status-name pointer" onclick="location.href='/user/${subUser.id}'">
