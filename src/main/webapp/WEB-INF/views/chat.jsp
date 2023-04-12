@@ -134,7 +134,7 @@
 </script>
 <body>
 	<div id="container" class="container">
-		<h1>${roomName}의 채팅방</h1>
+		<h1>${roomName}</h1>
 		<input type="hidden" id="sessionId" value="">
 		<input type="hidden" id="roomNumber" value="${roomNumber}">
 
