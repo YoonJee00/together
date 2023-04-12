@@ -144,7 +144,7 @@
 		<div id="yourName">
 			<table class="inputTable">
 				<tr>
-					<th>사용자명</th>
+					<th>유저 명</th>
 					<th><input class="form-control form-control-sm" type="text" name="userName" id="userName"></th>
 					<th><button class="btn btn-sm btn-warning" onclick="chatName()" id="startBtn">이름 등록</button></th>
 				</tr>
