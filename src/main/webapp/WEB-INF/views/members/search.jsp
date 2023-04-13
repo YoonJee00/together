@@ -31,6 +31,7 @@
             border:none;
             position:relative;
             height:60px;
+            width: 250px;
             font-size:1.6em;
             padding:0 2em;
             cursor:pointer;

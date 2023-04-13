@@ -55,6 +55,60 @@
               height: 50px; /* 원하는 최대 높이 설정 */
               border-radius: 50%; /* 동그랗게 만들기 */
        }
+
+        button {
+            background-color: #FFA500;
+            border: none;
+            color: #ffffff;
+            cursor: pointer;
+            display: inline-block;
+            font-size: 1em;
+            font-size: 15px;
+            line-height: 1em;
+            margin: 10px 10px;
+            outline: none;
+            padding: 12px 40px 10px;
+            position: relative;
+            text-transform: uppercase;
+            font-weight: 700;
+        }
+        button:before,
+        button:after {
+            border-color: transparent;
+            -webkit-transition: all 0.25s;
+            transition: all 0.25s;
+            border-style: solid;
+            border-width: 0;
+            content: "";
+            height: 24px;
+            position: absolute;
+            width: 24px;
+        }
+        button:before {
+            border-color: #FFA500;
+            border-right-width: 2px;
+            border-top-width: 2px;
+            right: -5px;
+            top: -5px;
+        }
+        button:after {
+            border-bottom-width: 2px;
+            border-color: #FFA500;
+            border-left-width: 2px;
+            bottom: -5px;
+            left: -5px;
+        }
+        button:hover,
+        button.hover {
+            background-color: #FFA500;
+        }
+        button:hover:before,
+        button.hover:before,
+        button:hover:after,
+        button.hover:after {
+            height: 100%;
+            width: 100%;
+        }
     </style>
 
 </head>
@@ -64,7 +118,7 @@
 <h2>유저 검색</h2>
    <div>
       <form action="/members/memberList" method="GET">
-         <input type="text" name="keyword" placeholder="유저 정보를 입력해주세요">
+         <input type="text" name="keyword" placeholder="유저 정보를 입력해주세요" style="width: 200px; height: 30px">
          <button type="submit">검색</button>
       </form>
    </div>
